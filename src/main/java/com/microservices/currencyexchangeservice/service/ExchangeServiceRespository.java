@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 public
 interface ExchangeServiceRespository extends CrudRepository<ExchangeValue,Long> {
 
+    ExchangeValue findByFromAndTo(String from,String to);
 
 }

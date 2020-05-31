@@ -18,18 +18,13 @@ public class CurrencyExchangeController {
 
     @Autowired
     ExchangeServiceRespository exchangeServiceRespository ;
+    private ExchangeValue exchangeValue;
 
     @GetMapping("/currency-exchange/from/{from}/to/{to}")
     public ExchangeValue retrieveLimitsFromConfigurations(@PathVariable String from,@PathVariable String to){
-        ExchangeValue USexchange=new ExchangeValue("USD","INR", BigDecimal.valueOf(65));
-        ExchangeValue EURexchange=new ExchangeValue("EUR","INR", BigDecimal.valueOf(80));
-        ExchangeValue AEDexchange=new ExchangeValue("AED","INR", BigDecimal.valueOf(25));
 
-        exchangeServiceRespository.save(USexchange);
-        exchangeServiceRespository.save(EURexchange);
-        exchangeServiceRespository.save(AEDexchange);
-
-        USexchange.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
-        return USexchange;
+        exchangeValue=exchangeServiceRespository.findByFromAndTo(from,to);
+        exchangeValue.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
+        return exchangeValue;
     }
 }
