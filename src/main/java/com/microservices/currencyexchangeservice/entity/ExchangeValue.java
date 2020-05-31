@@ -1,7 +1,5 @@
 package com.microservices.currencyexchangeservice.entity;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -19,6 +17,8 @@ public class ExchangeValue {
 
     private String to;
     private BigDecimal conversionMultiple;
+
+   @Transient
     private int port;
 
     public ExchangeValue() {
